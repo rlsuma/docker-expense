@@ -3,18 +3,18 @@ networks :
   default:
     name:expense
 services:
-  MYSQL:
-    image: MYSQL:v1.0.0
-    container_name: MYSQL  # equal to --name mysql
-  BACKEND: 
-      image: BACKEND:v1.0.0
-      container_name: BACKEND
-      depends_on: MYSQL
-  FRONTEND:
-    image: FRONTEND:v1.0.0
-    container_name: FRONTEND
+  mysql:
+    image: mysql:v1.0.0
+    container_name: mysql  # equal to --name mysql
+  backend: 
+      image: backen:v1.0.0
+      container_name: backend
+      depends_on: mysql
+  frontend:
+    image: frontend:v1.0.0
+    container_name: frontend
     depens_on: 
-    - BACKEND
+    - backend
     ports:
     - "80:80"
 
