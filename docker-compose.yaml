@@ -3,14 +3,14 @@ networks :
   default:
     name:expense
 services:
-  mysql:
+  MYSQL:
     image: mysql:v1.0.0
     container_name: mysql  # equal to --name mysql
-  backend: 
+  BACKEND: 
       image: backen:v1.0.0
       container_name: backend
       depends_on: mysql
-  frontend:
+  FRONTEND:
     image: frontend:v1.0.0
     container_name: frontend
     depens_on: 
