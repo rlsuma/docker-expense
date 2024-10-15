@@ -1,13 +1,9 @@
-#!/bin/bash
-
-#check whether root user or not
-R="\e[31m"
-N="\e[0m"
-
-yum install -y yum-utils
-yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
-yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-systemctl start docker
-systemctl enable docker
-usermod -aG docker ec2-user
-echo -e "$R Logout and Login again $N"
+FROM mysql:8.0
+# not a human, only for system
+RUN adduser -r expense
+ENV MYSQL_ROOT_PASSWORD=ExpenseApp@1 \
+    MYSQL_USER=expense \
+    MYSQL_PASSWORD=ExpenseApp@1 \
+    MYSQL_DATABASE=transactions
+RUN chown -R expense:expense /var/lib/mysql /var/run/mysqld
+COPY scripts/*.sql /docker-entrypoint-initdb.d/
